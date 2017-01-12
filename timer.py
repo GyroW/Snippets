@@ -4,13 +4,12 @@ import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
-pins = [1, 2, 3]
+pins = [3, 5, 3]
 GPIO.setup(pins, GPIO.IN)
-
-if GPIO.input(1):
-	start = timer()
-
-if GPIO.input(2):
-	end = timer()
-
-print(end - start)  
+while 1:
+	if GPIO.input(3):
+		start = timer()
+	if GPIO.input(5):
+		end = timer()
+		time.sleep(0.3)
+		print(end - start)  
