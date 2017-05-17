@@ -1,0 +1,43 @@
+def mklst(x,bitcnt=8):
+	return [1 if (1<<j)&x else 0 for j in range(bitcnt-1,-1,-1)]
+		
+
+def showargs(title,args):
+	print("In %s : "%title,)
+	for s in args:
+		print(" %s"%s,)
+	print
+
+
+def f1(*args):
+	showargs("f1",args)	
+def f2(*args):
+	showargs("f2",args)		
+def f3(*args):
+	showargs("f3",args)	
+def f4(*args):
+	showargs("f4",args)	
+def f5(*args):
+	showargs("f5",args)		
+def f6(*args):
+	showargs("f6",args)		
+	
+# Jump table !!	
+jt= { 0b1000:f1,0b0001:f2,0b100000:f3,0b101:f4 }
+
+def jmpto(v,*args):
+	if v in jt:
+		jt[v](*args)			
+
+		
+#Test bit lijst
+print(mklst(0x678,bitcnt=12))
+print(mklst(0xa2))
+
+
+#Test jump table
+jmpto(0b100000,"test",1,2,3)
+jmpto(0b101,"hallo",10,20,30,4,5,6)
+
+# 0b100011 bestaat niet => Doet niets
+jmpto(0b100011,"test",1)
